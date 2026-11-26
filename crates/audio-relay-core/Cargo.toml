@@ -1,0 +1,28 @@
+[package]
+name = "audio-relay-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "FreeSWITCH audio streaming bridge: WebSocket transport, playback queue, mixer and protocol logic (no FreeSWITCH dependency)"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+base64 = "0.22"
+# 直接依赖 zlib：flate2 硬编码 15 位窗口，无法遵守 permessage-deflate
+# 协商出的 client_max_window_bits / server_max_window_bits。
+libz-sys = { version = "1.1", default-features = false, features = ["libc"] }
+libc = "0.2"
+rand = "0.8"
+rustls = { version = "0.23", default-features = false, features = ["std", "ring", "tls12"] }
+rustls-native-certs = "0.8"
+rustls-pemfile = "2"
+# preserve_order 保持 JSON 对象键的插入顺序，使改写后的 `data`
+# 对象按构造顺序稳定打印。
+serde_json = { version = "1", features = ["preserve_order"] }
+sha1 = "0.10"
+webpki-roots = "0.26"
+
+[lints]
+workspace = true

@@ -1,0 +1,21 @@
+[package]
+name = "mod-audio-relay"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "FreeSWITCH mod_audio_relay module in Rust: fswtch media-bug glue over audio-relay-core"
+
+[lib]
+name = "mod_audio_relay"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+audio-relay-core = { path = "../audio-relay-core" }
+fswtch = "0.1.8"
+
+[build-dependencies]
+pkg-config = "0.3"
+
+[lints]
+workspace = true
